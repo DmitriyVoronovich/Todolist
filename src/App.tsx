@@ -14,8 +14,8 @@ function App() {
         {id: v1(), title: 'GraphQL', isDone: false}
     ]);
 
-    const [filter, setFilter] = useState<FilterValueType>('all')
-    const [newTask, setNewTask] = useState('')
+    const [filter, setFilter] = useState<FilterValueType>('all');
+    const [newTask, setNewTask] = useState('');
 
     let taskForTodoList = tasks;
 
