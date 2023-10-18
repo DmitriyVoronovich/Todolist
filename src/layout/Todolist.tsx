@@ -1,7 +1,8 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React, {ChangeEvent, Dispatch, KeyboardEvent, SetStateAction, useState} from "react";
 import {FilterValueType} from "../App";
 import {Button} from "../components/Button";
 import {Input} from "../components/Input";
+import {v1} from "uuid";
 
 type TaskType = {
     id: string
@@ -12,23 +13,33 @@ type TaskType = {
 type TodolistPropsType = {
     title: string
     tasks: TaskType[]
-    removeTask: (id: string) => void
     changeFilter: (value: FilterValueType) => void
-    addTask: (newTask: string) => void
-    newTask: string
-    setNewTask: (newTask: string) => void
+    setTask: Dispatch<SetStateAction<{ id: string; title: string; isDone: boolean; }[]>>
 }
 
 export const Todolist = (props: TodolistPropsType) => {
+    const [newTask, setNewTask] = useState('');
+
+    const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setNewTask(event.currentTarget.value);
+    }
+
+    const addTask = (newTask: string) => {
+        let task = {id: v1(), title: newTask, isDone: false}
+        props.setTask([task, ...props.tasks])
+        setNewTask('')
+    }
+
+    const removeTask = (id: string) => {
+        let filterTask = props.tasks.filter(task =>
+            task.id !== id)
+        props.setTask(filterTask)
+    }
 
     const onKeyUp = (event: KeyboardEvent) => {
         if (event.key === 'Enter') {
-            props.addTask(props.newTask)
+            addTask(newTask)
         }
-    }
-
-    const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        props.setNewTask(event.currentTarget.value);
     }
 
     const task = props.tasks.map((item) => {
@@ -37,7 +48,7 @@ export const Todolist = (props: TodolistPropsType) => {
                 <input type="checkbox" checked={item.isDone}/>
                 <span>{item.title}</span>
                 <Button callback={() => {
-                    props.removeTask(item.id)
+                    removeTask(item.id)
                 }} name={'✖️'}/>
             </li>
         )
@@ -47,8 +58,8 @@ export const Todolist = (props: TodolistPropsType) => {
         <div>
             <h3>{props.title}</h3>
             <div>
-                <Input callback={onChangeInputHandler} newTask={props.newTask} onKeyUp={onKeyUp}/>
-                <Button name={'+'} callback={() => props.addTask(props.newTask)}/>
+                <Input callback={onChangeInputHandler} newTask={newTask} onKeyUp={onKeyUp}/>
+                <Button name={'+'} callback={() => addTask(newTask)}/>
             </div>
             <ul>
                 {task}
