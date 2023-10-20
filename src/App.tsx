@@ -44,7 +44,8 @@ function App() {
                       tasks={taskForTodoList}
                       changeFilter={changeFilter}
                       setTasks={setTasks}
-                      changeTaskStatus={changeTaskStatus}/>
+                      changeTaskStatus={changeTaskStatus}
+            filter={filter}/>
         </div>
     );
 }
