@@ -2,7 +2,7 @@ import React, {ChangeEvent, Dispatch, KeyboardEvent, SetStateAction, useState} f
 import {FilterValueType} from "../App";
 import {v1} from "uuid";
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
     isDone: boolean
