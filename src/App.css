@@ -7,6 +7,19 @@
   margin-right: 50px;
 }
 
+.title {
+display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.title button{
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+
 .error {
   border: red 1px solid;
 }
