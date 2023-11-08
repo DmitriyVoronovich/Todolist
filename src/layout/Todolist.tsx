@@ -25,6 +25,20 @@ type TodolistPropsType = {
 
 export const Todolist = (props: TodolistPropsType) => {
 
+    const filteredTasks = (filter: FilterType) => {
+
+        switch (filter) {
+            case FilterType.ACTIVE:
+                return props.tasks.filter(task => !task.isDone);
+            case FilterType.COMPLETED:
+                return props.tasks.filter(task => task.isDone);
+            case FilterType.ALL:
+                return [...props.tasks];
+            default:
+                return [];
+        }
+    }
+
     const addTask = (title: string) => {
         props.addTask(title, props.id)
     };
@@ -33,7 +47,7 @@ export const Todolist = (props: TodolistPropsType) => {
         props.changeTodolistTitle(title, props.id);
     };
 
-    const task = props.tasks.map((item) => {
+    const task = filteredTasks(props.filter).map((item) => {
         const onChangeIsDone = (event: ChangeEvent<HTMLInputElement>) => {
             const newIsDoneValue = event.currentTarget.checked;
             props.changeTaskStatus(item.id, newIsDoneValue, props.id);

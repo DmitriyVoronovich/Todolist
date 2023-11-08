@@ -39,15 +39,14 @@ function App() {
         ]
     });
 
-    const [todolists, setTodolists] = useState<Array<TodolistType>>([
+    const [todolists, settodolists] = useState<Array<TodolistType>>([
         {id: todolistID1, title: 'What to learn', filter: FilterType.ALL},
         {id: todolistID2, title: 'Activities', filter: FilterType.ALL}
     ]);
 
     const changeFilter = (value: FilterType, todolistId: string) => {
-        setTodolists(todolists.map(item => item.id === todolistId ? {...item, filter: value} : item));
+        settodolists(todolists.map(item => item.id === todolistId ? {...item, filter: value} : item));
     };
-    //пересмотреть весь код и по возможности переписать функции по похожему синтаксису как и выше (главное разобраться, что тут происходит)
 
     const addTask = (title: string, todolistId: string) => {
         let task = {id: v1(), title: title, isDone: false};
@@ -59,7 +58,7 @@ function App() {
     };
 
     const deleteTodolist = (todolistId: string) => {
-        setTodolists(todolists.filter(item => item.id !== todolistId));
+        settodolists(todolists.filter(item => item.id !== todolistId));
         delete tasks[todolistId];
     }
 
@@ -72,13 +71,13 @@ function App() {
     };
 
     const changeTodolistTitle = (title: string, todolistId: string) => {
-        setTodolists([...todolists.map(item => item.id === todolistId ? {...item, title} : item)]);
+        settodolists([...todolists.map(item => item.id === todolistId ? {...item, title} : item)]);
     };
 
     const addTodolist = (title: string) => {
         let newTodolistId = v1();
         let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: FilterType.ALL};
-        setTodolists([newTodolist, ...todolists]);
+        settodolists([newTodolist, ...todolists]);
         setTasks({...tasks, [newTodolistId]: []});
     };
 
@@ -86,26 +85,12 @@ function App() {
         <div className="App">
             <AddItemForm addItem={addTodolist}/>
             {todolists.map(todolist => {
-                const filteredTasks = (filter: FilterType) => {
-
-                    switch (filter) {
-                        case FilterType.ACTIVE:
-                            return tasks[todolist.id].filter(task => !task.isDone);
-                        case FilterType.COMPLETED:
-                            return tasks[todolist.id].filter(task => task.isDone);
-                        case FilterType.ALL:
-                            return [...tasks[todolist.id]];
-                        default:
-                            return [];
-                    }
-                }
-                //перенести фильтрацию в нутрь компоненты Todolist
 
                 return (
                     <Todolist title={todolist.title}
                               id={todolist.id}
                               key={todolist.id}
-                              tasks={filteredTasks(todolist.filter)}
+                              tasks={tasks[todolist.id]}
                               changeFilter={changeFilter}
                               changeTaskStatus={changeTaskStatus}
                               filter={todolist.filter}
