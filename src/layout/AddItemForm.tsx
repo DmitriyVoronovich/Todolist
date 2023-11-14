@@ -4,7 +4,7 @@ import { IconButton, TextField} from "@mui/material";
 import {AddBox} from "@mui/icons-material";
 
 export type AddItemFormPropsType = {
-    addItem: (title: string) => void
+    callback: (title: string) => void
 }
 
 export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
@@ -13,7 +13,7 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
 
     const addItem = () => {
         if (title.trim() !== '') {
-            props.addItem(title);
+            props.callback(title);
             setTitle('');
         } else {
             setError('Title is required')

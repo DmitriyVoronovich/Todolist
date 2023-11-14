@@ -49,15 +49,15 @@ export const Todolist = (props: TodolistPropsType) => {
         props.changeTodolistTitle(title, props.id);
     };
 
+    const onChangeTaskTitle = (title: string, id: string) => {
+        props.changeTaskTitleValue(id, title, props.id)
+    }
+
     const task = filteredTasks(props.filter).map((item) => {
         const onChangeIsDone = (event: ChangeEvent<HTMLInputElement>) => {
             const newIsDoneValue = event.currentTarget.checked;
             props.changeTaskStatus(item.id, newIsDoneValue, props.id);
         };
-
-        const onChangeTaskTitle = (title: string) => {
-            props.changeTaskTitleValue(item.id, title, props.id)
-        }
 
         return (
             <li key={item.id}>
@@ -65,7 +65,7 @@ export const Todolist = (props: TodolistPropsType) => {
                           onChange={onChangeIsDone}
                           className={item.isDone ? 'is-done' : ''}
                           color='primary'/>
-                <EditableSpan value={item.title} onChange={onChangeTaskTitle}/>
+                <EditableSpan value={item.title} onChange={(title)=>onChangeTaskTitle(item.id, title)}/>
                 <IconButton onClick={() => props.removeTask(item.id, props.id)}>
                     <Delete/>
                 </IconButton>
@@ -81,7 +81,7 @@ export const Todolist = (props: TodolistPropsType) => {
                     <Delete/>
                 </IconButton>
             </h3>
-            <AddItemForm addItem={addTask}/>
+            <AddItemForm callback={addTask}/>
             <ul>
                 {task}
             </ul>

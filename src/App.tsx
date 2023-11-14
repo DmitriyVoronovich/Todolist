@@ -73,12 +73,12 @@ function App() {
     };
 
     const changeTodolistTitle = (title: string, todolistId: string) => {
-        settodolists([...todolists.map(item => item.id === todolistId ? {...item, title} : item)]);
+        settodolists(todolists.map(item => item.id === todolistId ? {...item, title} : item));
     };
 
     const addTodolist = (title: string) => {
-        let newTodolistId = v1();
-        let newTodolist: TodolistType = {id: newTodolistId, title: title, filter: FilterType.ALL};
+        const newTodolistId = v1();
+        const newTodolist: TodolistType = {id: newTodolistId, title: title, filter: FilterType.ALL};
         settodolists([newTodolist, ...todolists]);
         setTasks({...tasks, [newTodolistId]: []});
     };
@@ -97,7 +97,7 @@ function App() {
             </AppBar>
             <Container fixed>
                 <Grid container style={{padding: '20px'}}>
-                    <AddItemForm addItem={addTodolist} />
+                    <AddItemForm callback={addTodolist} />
                 </Grid>
                 <Grid container spacing={3}>
                     {todolists.map(todolist => {
