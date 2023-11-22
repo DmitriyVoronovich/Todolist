@@ -2,7 +2,7 @@ import React, {useReducer} from 'react';
 import './App.css';
 import {TaskType, Todolist} from "./layout/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "./layout/AddItemForm";
+import {AddItemForm} from "./components/AddItemForm";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -111,7 +111,7 @@ function App() {
                             <Grid item>
                                 <Paper style={{padding: '10px'}} elevation={3}>
                                     <Todolist title={todolist.title}
-                                              id={todolist.id}
+                                              todolistId={todolist.id}
                                               key={todolist.id}
                                               tasks={tasks[todolist.id]}
                                               changeFilter={changedFilter}
