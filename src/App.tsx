@@ -44,16 +44,16 @@ function App() {
     const [tasks, dispatchTasks] = useReducer(tasksReducer, {
             [todolistID1]: [
                 {id: v1(), title: 'HTML&CSS', isDone: true},
-                {id: v1(), title: 'JS', isDone: true},
+                {id: v1(), title: 'JS', isDone: false},
                 {id: v1(), title: 'React', isDone: false},
-                {id: v1(), title: 'Rest API', isDone: false},
+                {id: v1(), title: 'Rest API', isDone: true},
                 {id: v1(), title: 'GraphQL', isDone: false}
             ],
             [todolistID2]: [
-                {id: v1(), title: 'Run', isDone: true},
+                {id: v1(), title: 'Run', isDone: false},
                 {id: v1(), title: 'Jump', isDone: true},
-                {id: v1(), title: 'Swim', isDone: false},
-                {id: v1(), title: 'Play football', isDone: false},
+                {id: v1(), title: 'Swim', isDone: true},
+                {id: v1(), title: 'Play football', isDone: true},
                 {id: v1(), title: 'To go for a walk', isDone: false}
             ]
         });
@@ -63,15 +63,15 @@ function App() {
             {id: todolistID2, title: 'Activities', filter: FilterType.ALL}
         ]);
 
-    const changedFilter = (value: FilterType, todolistId: string) => {
+    const changedFilter = (todolistId: string, value: FilterType) => {
         dispatchTodolist(changeFilter(todolistId, value));
     };
 
-    const addTasks = (title: string, todolistId: string) => {
+    const addTasks = (todolistId: string, title: string) => {
         dispatchTasks(addTask(todolistId, title));
     };
 
-    const removeTasks = (id: string, todolistId: string) => {
+    const removeTasks = (todolistId: string, id: string) => {
         dispatchTasks(removeTask(todolistId, id));
     };
 
@@ -80,15 +80,15 @@ function App() {
         delete tasks[todolistId];
     }
 
-    const changeTasksStatus = (id: string, isDone: boolean, todolistId: string) => {
+    const changeTasksStatus = (todolistId: string, id: string, isDone: boolean) => {
         dispatchTasks(changeTaskStatus(todolistId, id, isDone));
     };
 
-    const changeTasksTitleValue = (id: string, title: string, todolistId: string) => {
+    const changeTasksTitleValue = (todolistId: string, id: string, title: string) => {
         dispatchTasks(changeTaskTitleValue(todolistId, id, title));
     };
 
-    const changedTodolistTitle = (title: string, todolistId: string) => {
+    const changedTodolistTitle = (todolistId: string, title: string) => {
         dispatchTodolist(changeTodolistTitle(todolistId, title));
     };
 
