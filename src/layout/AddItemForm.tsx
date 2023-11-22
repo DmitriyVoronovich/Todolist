@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import './../App.css'
-import { IconButton, TextField} from "@mui/material";
-import {AddBox} from "@mui/icons-material";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 export type AddItemFormPropsType = {
     callback: (title: string) => void
@@ -31,6 +31,14 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
         }
     };
 
+    const buttonStyled = {
+        minWidth:'55px',
+        maxWidth:'55px',
+        minHeight:'55px',
+        maxHeight:'55px',
+        marginLeft:'5px'
+    }
+
     return (
         <div>
             <TextField value={title}
@@ -38,12 +46,11 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
                        onKeyUp={onKeyPressHandler}
                        error={!!error}
                        variant='outlined'
-                       label='Title'
-                       helperText={error}/>
-            <IconButton color='primary'
-                        onClick={addItem}>
-                <AddBox/>
-            </IconButton>
+                       label={error ? error : 'Type text here...'}/>
+                <Button style={buttonStyled}
+                        onClick={addItem}
+                        color='secondary'
+                        variant='contained'>+</Button>
         </div>
     )
 };
