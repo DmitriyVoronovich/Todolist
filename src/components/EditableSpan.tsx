@@ -26,6 +26,7 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = (props) => {
     return editMode
         ? <TextField variant='outlined'
                      value={title}
+                     size='small'
                      onBlur={activateViewMode}
                      onChange={onChangeHandler} autoFocus/>
         : <span onDoubleClick={activateEditMode}>{title}</span>

@@ -110,19 +110,19 @@ export const Todolist = (props: TodolistPropsType) => {
             <div>
                 <Button onClick={onAllClickHandler}
                         variant={filter === FilterType.ALL ? 'outlined' : 'contained'}
-                        color='secondary'>
+                        color='primary'>
                     All
                 </Button>
                 <Button onClick={onActiveClickHandler}
                         variant={filter === FilterType.ACTIVE ? 'outlined' : 'contained'}
-                        color='secondary'
+                        color='primary'
                         style={{margin: '0 5px'}}
                 >
                     Active
                 </Button>
                 <Button onClick={onCompletedClickHandler}
                         variant={filter === FilterType.COMPLETED ? 'outlined' : 'contained'}
-                        color='secondary'
+                        color='primary'
                 >
                     Completed
                 </Button>

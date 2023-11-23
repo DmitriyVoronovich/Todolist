@@ -32,16 +32,17 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
     };
 
     const buttonStyled = {
-        minWidth:'55px',
-        maxWidth:'55px',
-        minHeight:'55px',
-        maxHeight:'55px',
+        minWidth:'40px',
+        maxWidth:'40px',
+        minHeight:'40px',
+        maxHeight:'40px',
         marginLeft:'5px'
     }
 
     return (
         <div>
             <TextField value={title}
+                       size="small"
                        onChange={onChangeHandler}
                        onKeyUp={onKeyPressHandler}
                        error={!!error}
@@ -49,7 +50,7 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
                        label={error ? error : 'Type text here...'}/>
                 <Button style={buttonStyled}
                         onClick={addItem}
-                        color='secondary'
+                        color='primary'
                         variant='contained'>+</Button>
         </div>
     )
