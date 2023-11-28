@@ -1,11 +1,11 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {FilterType} from "../App";
 import {AddItemForm} from "../components/AddItemForm";
 import {EditableSpan} from "../components/EditableSpan";
-import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import Delete from "@mui/icons-material/Delete";
+import {CheckboxComp} from "../components/Checkbox";
 
 export type TaskType = {
     id: string
@@ -71,22 +71,17 @@ export const Todolist = (props: TodolistPropsType) => {
         changeFilter(todolistId, FilterType.COMPLETED)
     };
 
-    const onTodolistDelete = () => {
-        deleteTodolist(todolistId)
+    const onTodolistDelete = () => deleteTodolist(todolistId);
+
+    const callBackHandler = ( id: string, newIsDoneValue: boolean) => {
+        changeTaskStatus(todolistId, id, newIsDoneValue);
     };
 
     const task = filteredTasks(filter).map((item) => {
-        const onChangeIsDone = (event: ChangeEvent<HTMLInputElement>) => {
-            const newIsDoneValue = event.currentTarget.checked;
-            changeTaskStatus(todolistId, item.id, newIsDoneValue);
-        };
 
         return (
             <li key={item.id}>
-                <Checkbox checked={item.isDone}
-                          onChange={onChangeIsDone}
-                          className={item.isDone ? 'is-done' : ''}
-                          color='primary'/>
+               <CheckboxComp callBack={(newIsDoneValue)=>callBackHandler(item.id, newIsDoneValue)} isDone={item.isDone}/>
                 <EditableSpan value={item.title} onChange={(title) => onChangeTaskTitle(item.id, title)}/>
                 <IconButton onClick={() => removeTask(todolistId, item.id)}>
                     <Delete/>
