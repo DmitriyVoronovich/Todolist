@@ -77,7 +77,7 @@ function App() {
 
     const deleteTodolist = (todolistId: string) => {
         dispatchTodolist(removeTodolist(todolistId));
-        delete tasks[todolistId];
+        dispatchTasks(removeTodolist(todolistId));
     }
 
     const changeTasksStatus = (todolistId: string, id: string, isDone: boolean) => {

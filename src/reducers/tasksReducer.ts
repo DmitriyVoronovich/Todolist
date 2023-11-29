@@ -6,7 +6,8 @@ type TasksReducerType =
     | RemoveTaskType
     | ChangeTaskStatusType
     | ChangeTaskTitleValueType
-    | AddTaskToTodolistType;
+    | AddTaskToTodolistType
+    | removeTodolistType;
 
 export const tasksReducer = (state: TaskStateType, action: TasksReducerType): TaskStateType => {
     switch (action.type) {
@@ -35,6 +36,10 @@ export const tasksReducer = (state: TaskStateType, action: TasksReducerType): Ta
         }
         case "ADD-TASK-TO-TODOLIST": {
             return {...state, [action.payload.newTodolistId]: []}
+        }
+        case "REMOVE-TODOLIST": {
+            delete state[action.payload.todolistId]
+            return state
         }
         default:
             return state
@@ -98,6 +103,17 @@ export const addTaskToTodolist = (newTodolistId: string) => {
         type: 'ADD-TASK-TO-TODOLIST',
         payload: {
             newTodolistId
+        }
+    } as const
+}
+
+type removeTodolistType = ReturnType<typeof removeTodolist>
+
+export const removeTodolist = (todolistId: string) => {
+    return {
+        type: 'REMOVE-TODOLIST',
+        payload: {
+            todolistId
         }
     } as const
 }
