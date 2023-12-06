@@ -18,20 +18,23 @@ export const tasksReducer = (state: TaskStateType, action: TasksReducerType): Ta
         }
         case "REMOVE-TASK": {
             const todolistId = action.payload.todolistId
-            return ({...state, [todolistId]: state[todolistId].filter(item => item.id !== action.payload.id)})
+            return {...state, [todolistId]: state[todolistId]
+                    .filter(item => item.id !== action.payload.id)}
         }
         case "CHANGE-TASK-STATUS": {
             const todolistId = action.payload.todolistId
             return {
                 ...state,
-                [todolistId]: state[todolistId].map(item => item.id === action.payload.id ? {...item, isDone: action.payload.isDone} : item)
+                [todolistId]: state[todolistId]
+                    .map(item => item.id === action.payload.id ? {...item, isDone: action.payload.isDone} : item)
             }
         }
         case "CHANGE-TASK-TITLE-VALUE": {
             const todolistId = action.payload.todolistId
             return {
                 ...state,
-                [todolistId]: state[todolistId].map(item => item.id === action.payload.id ? {...item, title: action.payload.title} : item)
+                [todolistId]: state[todolistId]
+                    .map(item => item.id === action.payload.id ? {...item, title: action.payload.title} : item)
             }
         }
         case "ADD-TASK-TO-TODOLIST": {
