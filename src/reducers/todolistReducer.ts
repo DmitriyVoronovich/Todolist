@@ -42,7 +42,7 @@ export const changeFilter = (todolistId: string, value: FilterType) => {
     } as const
 };
 
-type RemoveTodolistType = ReturnType<typeof removeTodolist>;
+export type RemoveTodolistType = ReturnType<typeof removeTodolist>;
 
 export const removeTodolist = (todolistId: string) => {
     return {

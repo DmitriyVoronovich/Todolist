@@ -1,6 +1,6 @@
 import {TaskStateType} from "../App";
 import {v1} from "uuid";
-import { AddTodolistType } from "./todolistReducer";
+import {AddTodolistType, RemoveTodolistType} from "./todolistReducer";
 
 
 type TasksReducerType =
@@ -9,7 +9,7 @@ type TasksReducerType =
     | ChangeTaskStatusType
     | ChangeTaskTitleValueType
     | AddTodolistType
-    | removeTodolistType;
+    | RemoveTodolistType;
 
 const initialState: TaskStateType = {};
 
@@ -99,17 +99,6 @@ export const changeTaskTitleValue = (todolistId: string, id: string, title: stri
             todolistId,
             id,
             title
-        }
-    } as const
-}
-
-type removeTodolistType = ReturnType<typeof removeTodolist>
-
-export const removeTodolist = (todolistId: string) => {
-    return {
-        type: 'REMOVE-TODOLIST',
-        payload: {
-            todolistId
         }
     } as const
 }

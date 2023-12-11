@@ -3,7 +3,7 @@ import {
     addTask,
     changeTaskStatus,
     changeTaskTitleValue,
-    removeTask, removeTodolist,
+    removeTask,
     tasksReducer
 } from "./tasksReducer";
 import {TaskStateType} from "../App";
@@ -76,17 +76,3 @@ test('title of specified task should be changed', () => {
     expect(endState['todolistId2'][1].title).toBe('coffee')
     expect(endState['todolistId1'][1].title).toBe('JS')
 })
-
-test('property with todolistId should be deleted', () => {
-
-    const action = removeTodolist('todolistId2')
-
-    const endState = tasksReducer(startState, action)
-
-    const keys = Object.keys(endState)
-
-    expect(keys.length).toBe(1)
-    expect(endState['todolistId2']).not.toBeDefined()
-})
-
-

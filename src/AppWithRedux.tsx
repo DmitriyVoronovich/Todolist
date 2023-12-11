@@ -37,6 +37,7 @@ export enum FilterType {
 }
 
 function AppWithRedux() {
+
     const todolists = useSelector<AppRootStateType, TodolistType[]>(state => state.todolists);
     const tasks = useSelector<AppRootStateType, TaskStateType>(state => state.tasks);
     const dispatch = useDispatch();
@@ -55,7 +56,6 @@ function AppWithRedux() {
 
     const deleteTodolist = (todolistId: string) => {
         dispatch(removeTodolist(todolistId));
-
     }
 
     const changeTasksStatus = (todolistId: string, id: string, isDone: boolean) => {
@@ -73,7 +73,6 @@ function AppWithRedux() {
     const addedTodolist = (title: string) => {
         const newTodolistId = v1();
         dispatch(addTodolist(newTodolistId, title));
-
     };
 
     return (
