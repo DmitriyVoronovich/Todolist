@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import {ButtonAppBar} from "./components/ButtonAppBar";
 import {
     addTask,
-    addTaskToTodolist,
     changeTaskStatus,
     changeTaskTitleValue,
     removeTask,
@@ -95,7 +94,7 @@ function App() {
     const addedTodolist = (title: string) => {
         const newTodolistId = v1();
         dispatchTodolist(addTodolist(newTodolistId, title));
-        dispatchTasks(addTaskToTodolist(newTodolistId));
+        dispatchTasks(addTodolist(newTodolistId, title));
     };
 
     return (

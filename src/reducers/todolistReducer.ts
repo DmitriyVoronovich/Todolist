@@ -63,7 +63,7 @@ export const changeTodolistTitle = (todolistId: string ,title: string) => {
     } as const
 };
 
-type AddTodolistType = ReturnType<typeof addTodolist>;
+export type AddTodolistType = ReturnType<typeof addTodolist>;
 
 export const addTodolist = (newTodolistId: string, title: string) => {
     return {
