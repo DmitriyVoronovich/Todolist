@@ -6,7 +6,9 @@ type TodolistReducerType =
     ChangeTodolistTitleType |
     AddTodolistType;
 
-export const todolistReducer = (state: TodolistType[], action: TodolistReducerType): TodolistType[] => {
+const initialState: TodolistType[] = [];
+
+export const todolistReducer = (state: TodolistType[] = initialState, action: TodolistReducerType): TodolistType[] => {
     switch (action.type) {
         case "CHANGE-FILTER": {
             const todolistId = action.payload.todolistId

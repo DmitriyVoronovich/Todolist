@@ -11,7 +11,9 @@ type TasksReducerType =
     | AddTodolistType
     | removeTodolistType;
 
-export const tasksReducer = (state: TaskStateType, action: TasksReducerType): TaskStateType => {
+const initialState: TaskStateType = {};
+
+export const tasksReducer = (state: TaskStateType = initialState, action: TasksReducerType): TaskStateType => {
     switch (action.type) {
         case "ADD-TASK": {
             const todolistId = action.payload.todolistId
