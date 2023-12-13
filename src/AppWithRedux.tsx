@@ -71,8 +71,8 @@ function AppWithRedux() {
     };
 
     const addedTodolist = (title: string) => {
-        const newTodolistId = v1();
-        dispatch(addTodolist(newTodolistId, title));
+        const action = addTodolist(title);
+        dispatch(action);
     };
 
     return (
@@ -89,7 +89,6 @@ function AppWithRedux() {
                                 <Paper style={{padding: '10px'}} elevation={3}>
                                     <Todolist title={todolist.title}
                                               todolistId={todolist.id}
-                                              key={todolist.id}
                                               tasks={tasks[todolist.id]}
                                               changeFilter={changedFilter}
                                               changeTaskStatus={changeTasksStatus}

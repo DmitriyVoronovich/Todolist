@@ -2,13 +2,13 @@ import {addTodolist, changeFilter, changeTodolistTitle, removeTodolist, todolist
 import {v1} from 'uuid';
 import {FilterType, TodolistType} from '../App';
 
-let todolistId1 = v1();
-let todolistId2 = v1();
+let todolistId1: string
+let todolistId2: string
 let startState: Array<TodolistType>
 
 beforeEach(() => {
-    let todolistId1 = v1();
-    let todolistId2 = v1();
+   todolistId1 = v1();
+   todolistId2 = v1();
 
     startState = [
         {id: todolistId1, title: "What to learn", filter: FilterType.ALL},
@@ -25,10 +25,10 @@ test('correct todolist should be removed', () => {
 });
 
 test('correct todolist should be added', () => {
-    let newTodolistId = v1();
+
     let newTodolistTitle = "New Todolist";
 
-    const endState = todolistReducer(startState, addTodolist(newTodolistId, newTodolistTitle))
+    const endState = todolistReducer(startState, addTodolist( newTodolistTitle))
 
     expect(endState.length).toBe(3);
     expect(endState[2].title).toBe(newTodolistTitle);

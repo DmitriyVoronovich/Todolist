@@ -75,8 +75,9 @@ function App() {
     };
 
     const deleteTodolist = (todolistId: string) => {
-        dispatchTodolist(removeTodolist(todolistId));
-        dispatchTasks(removeTodolist(todolistId));
+        const action = removeTodolist(todolistId)
+        dispatchTodolist(action);
+        dispatchTasks(action);
     }
 
     const changeTasksStatus = (todolistId: string, id: string, isDone: boolean) => {
@@ -92,9 +93,9 @@ function App() {
     };
 
     const addedTodolist = (title: string) => {
-        const newTodolistId = v1();
-        dispatchTodolist(addTodolist(newTodolistId, title));
-        dispatchTasks(addTodolist(newTodolistId, title));
+        const action = addTodolist(title);
+        dispatchTodolist(action);
+        dispatchTasks(action);
     };
 
     return (

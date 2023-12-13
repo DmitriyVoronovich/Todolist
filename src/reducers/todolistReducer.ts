@@ -1,3 +1,4 @@
+import { v1 } from "uuid";
 import {FilterType, TodolistType} from "../App";
 
 type TodolistReducerType =
@@ -67,12 +68,12 @@ export const changeTodolistTitle = (todolistId: string ,title: string) => {
 
 export type AddTodolistType = ReturnType<typeof addTodolist>;
 
-export const addTodolist = (newTodolistId: string, title: string) => {
+export const addTodolist = ( title: string) => {
     return {
         type: 'ADD-TODOLIST',
         payload: {
             title,
-            newTodolistId
+            newTodolistId: v1()
         }
     } as const
 };
