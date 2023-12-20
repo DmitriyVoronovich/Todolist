@@ -110,18 +110,7 @@ function App() {
                         return (
                             <Grid item>
                                 <Paper style={{padding: '10px'}} elevation={3}>
-                                    <Todolist title={todolist.title}
-                                              todolistId={todolist.id}
-                                              key={todolist.id}
-                                              tasks={tasks[todolist.id]}
-                                              changeFilter={changedFilter}
-                                              changeTaskStatus={changeTasksStatus}
-                                              filter={todolist.filter}
-                                              removeTask={removeTasks}
-                                              addTask={addTasks}
-                                              deleteTodolist={deleteTodolist}
-                                              changeTaskTitleValue={changeTasksTitleValue}
-                                              changeTodolistTitle={changedTodolistTitle}/>
+                                    <Todolist todolist={todolist}/>
                                 </Paper>
                             </Grid>
                         )
@@ -131,6 +120,19 @@ function App() {
         </div>
     );
 }
+
+// title={todolist.title}
+// todolistId={todolist.id}
+// key={todolist.id}
+// tasks={tasks[todolist.id]}
+// changeFilter={changedFilter}
+// changeTaskStatus={changeTasksStatus}
+// filter={todolist.filter}
+// removeTask={removeTasks}
+// addTask={addTasks}
+// deleteTodolist={deleteTodolist}
+// changeTaskTitleValue={changeTasksTitleValue}
+// changeTodolistTitle={changedTodolistTitle}
 
 export default App;
 
