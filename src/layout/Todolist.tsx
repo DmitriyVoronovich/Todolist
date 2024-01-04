@@ -5,13 +5,13 @@ import {EditableSpan} from "../components/EditableSpan";
 import IconButton from "@mui/material/IconButton";
 
 import Delete from "@mui/icons-material/Delete";
-import {CheckboxComp} from "../components/Checkbox";
 import {TaskStateType, TodolistType} from "../AppWithRedux";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../state/store";
-import {addTask, changeTaskStatus, changeTaskTitleValue, removeTask} from "../reducers/tasksReducer";
+import {addTask} from "../reducers/tasksReducer";
 import {changeFilter, changeTodolistTitle, removeTodolist} from "../reducers/todolistReducer";
 import {FilterButton} from "../components/Button";
+import {Task} from "../components/Task";
 
 export type TaskType = {
     id: string
@@ -45,45 +45,30 @@ export const Todolist = memo((props: TodolistPropsType) => {
 
     const addedTask = useCallback((title: string) => {
         dispatch(addTask(todolist.id, title));
-    }, [dispatch]);
+    }, [todolist.id, addTask]);
 
     const onChangeTodolistTitle = useCallback((title: string) => {
         dispatch(changeTodolistTitle(todolist.id, title));
     }, []);
 
-    const onChangeTaskTitle = useCallback((id: string, title: string) => {
-        dispatch(changeTaskTitleValue(todolist.id, id, title));
+    const onAllClickHandler = useCallback(() => {
+        dispatch(changeFilter(todolist.id, FilterType.ALL));
     }, []);
 
-    const onAllClickHandler = () => {
-        dispatch(changeFilter(todolist.id, FilterType.ALL));
-    };
-
-    const onActiveClickHandler = () => {
+    const onActiveClickHandler = useCallback(() => {
         dispatch(changeFilter(todolist.id, FilterType.ACTIVE));
-    };
+    }, []);
 
-    const onCompletedClickHandler = () => {
+    const onCompletedClickHandler = useCallback(() => {
         dispatch(changeFilter(todolist.id, FilterType.COMPLETED));
-    };
+    }, []);
 
     const onTodolistDelete = useCallback(() => dispatch(removeTodolist(todolist.id)), []);
-
-    const callBackHandler = useCallback((id: string, newIsDoneValue: boolean) => {
-        dispatch(changeTaskStatus(todolist.id, id, newIsDoneValue));
-    }, []);
 
     const task = filteredTasks(todolist.filter).map((item) => {
 
         return (
-            <li key={item.id}>
-                <CheckboxComp callBack={(newIsDoneValue) => callBackHandler(item.id, newIsDoneValue)}
-                              isDone={item.isDone}/>
-                <EditableSpan value={item.title} onChange={(title) => onChangeTaskTitle(item.id, title)}/>
-                <IconButton onClick={() => dispatch(removeTask(todolist.id, item.id))}>
-                    <Delete/>
-                </IconButton>
-            </li>
+            <Task item={item} todolist={todolist} key={item.id}/>
         )
     })
 
